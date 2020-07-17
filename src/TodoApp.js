@@ -6,13 +6,17 @@ import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
+
+import { TodosProvider, todoContext } from './context/todoContext'
+
 import useTodoState from "./hooks/useTodoState";
 
 function TodoApp() {
   const initialTodos = [{ id: 1, task: "Walk The Goldfish", completed: true }];
-  const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
-    initialTodos
-  );
+  // const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
+  //   initialTodos
+  // );
+  
   return (
     <Paper
       style={{
@@ -30,13 +34,15 @@ function TodoApp() {
       </AppBar>
       <Grid container justify='center' style={{ marginTop: "1rem" }}>
         <Grid item xs={11} md={8} lg={4}>
-          <TodoForm addTodo={addTodo} />
+          <TodosProvider>
+          <TodoForm />
           <TodoList
-            todos={todos}
-            removeTodo={removeTodo}
-            toggleTodo={toggleTodo}
-            editTodo={editTodo}
+            // todos={todos}
+            // removeTodo={removeTodo}
+            // toggleTodo={toggleTodo}
+            // editTodo={editTodo}
           />
+          </TodosProvider>
         </Grid>
       </Grid>
     </Paper>
